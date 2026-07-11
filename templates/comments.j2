@@ -1,0 +1,11 @@
+<div class="glass p-6 rounded-xl border border-slate-200/50 dark:border-slate-800/50 shadow-sm mt-8">
+    <h3 class="text-lg font-bold mb-4 text-slate-900 dark:text-white">
+        {% if lang == "zh" %}评论与交流{% else %}Comments{% endif %}
+    </h3>
+    <textarea class="w-full h-24 p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 text-sm focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 outline-none transition duration-150 text-slate-800 dark:text-slate-200" placeholder="{% if lang == 'zh' %}输入评论内容...{% else %}Leave a comment...{% endif %}"></textarea>
+    <div class="flex justify-end mt-3">
+        <button class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-md transition duration-150">
+            {% if lang == "zh" %}提交{% else %}Submit{% endif %}
+        </button>
+    </div>
+</div>

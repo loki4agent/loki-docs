@@ -1,0 +1,42 @@
+{% macro render_menu_node(node, lang, active_slug, depth=0) %}
+  {% if node.children %}
+    {# Directory category node: Render details/summary wrapper #}
+    <details class="group [&_summary::-webkit-details-marker]:hidden" {% if node.is_open %}open{% endif %}>
+        <summary class="flex items-center justify-between py-2 text-slate-700 dark:text-slate-300 cursor-pointer hover:bg-slate-200/30 dark:hover:bg-slate-800/40 rounded-lg transition-all duration-150 select-none focus:outline-none"
+                 style="padding-left: 12px; padding-right: 10px;">
+            {# Top-level categories are bolder; sub-categories are slightly lighter #}
+            <span class="{% if depth == 0 %}text-sm font-semibold text-slate-800 dark:text-slate-200{% else %}text-[13px] font-medium text-slate-600 dark:text-slate-400{% endif %}">
+                {{ node.name }}
+            </span>
+            <svg class="w-3.5 h-3.5 shrink-0 transform transition-transform duration-200 group-open:rotate-90 text-slate-400" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+            </svg>
+        </summary>
+        
+        {# Self-recursion call to nested children with indentation of exactly 16px #}
+        <div class="space-y-1 mt-1 mb-1.5" style="padding-left: 16px;">
+            {% for child in node.children %}
+                {{ render_menu_node(child, lang, active_slug, depth + 1) }}
+            {% endfor %}
+        </div>
+    </details>
+  {% else %}
+    {# Leaf document anchor node: Render plain link aligned precisely with its parent text #}
+    <a href="/{{ lang }}/{{ node.slug }}" 
+       class="flex items-center py-2 text-[13px] rounded-lg transition-all duration-150 focus:outline-none
+              {% if node.is_active %}
+                bg-slate-200/60 text-slate-950 dark:bg-slate-800/70 dark:text-white font-semibold
+              {% else %}
+                text-slate-600 dark:text-slate-400 hover:bg-slate-200/30 dark:hover:bg-slate-800/40 hover:text-slate-900 dark:hover:text-white
+              {% endif %}"
+       style="padding-left: 12px; padding-right: 10px;">
+        {{ node.name }}
+    </a>
+  {% endif %}
+{% endmacro %}
+
+<nav class="space-y-3.5 pr-2">
+    {% for node in sidebar_menu %}
+        {{ render_menu_node(node, lang, active_slug) }}
+    {% endfor %}
+</nav>

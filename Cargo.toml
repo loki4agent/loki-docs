@@ -1,0 +1,32 @@
+[workspace]
+members = [
+    ".",
+    "gen-manifest-cli"
+]
+
+[package]
+name = "loki-docs"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+leptos = { version = "0.8", features = ["csr"] }
+leptos_router = { version = "0.8" }
+minijinja = { version = "2.0" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+gray_matter = "0.2"
+pulldown-cmark = "0.11"
+reqwest = { version = "0.12", default-features = false, features = ["json"] }
+wasm-bindgen-futures = "0.4"
+wasm-bindgen = "0.2"
+web-sys = { version = "0.3", features = ["Window", "Document", "Element"] }
+futures = "0.3"
+console_error_panic_hook = "0.1"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+

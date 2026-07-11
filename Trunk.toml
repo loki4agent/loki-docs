@@ -1,0 +1,20 @@
+[build]
+target = "index.html"
+dist = "dist"
+
+[watch]
+ignore = ["dist", "dist/wasm", "public", "templates", "content", "target", "gen-manifest-cli"]
+
+[serve]
+port = 10404
+
+[[hooks]]
+stage = "pre_build"
+command = "cargo"
+command_arguments = ["run", "--manifest-path", "gen-manifest-cli/Cargo.toml"]
+
+
+[[hooks]]
+stage = "pre_build"
+command = "bunx"
+command_arguments = ["tailwindcss","-i", "./style/input.css", "-o", "./assets/css/main.css", "--minify"]

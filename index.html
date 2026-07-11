@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Loki Documentation</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <!-- Tailwind CSS styles -->
+        <link
+            rel="css"
+            data-trunk
+            href="assets/css/main.css"
+            data-target-path="css"
+        />
+        <!-- Prism Syntax Highlighting (Self-hosted & Auto-hashed by Trunk) -->
+        <script
+            data-trunk
+            src="assets/prism/prism.js"
+            data-target-path="prism"
+        ></script>
+
+        <link
+            rel="css"
+            data-trunk
+            href="assets/prism/prism.css"
+            data-target-path="prism"
+        />
+
+        <!-- Copy static assets and metadata natively -->
+        <link data-trunk rel="copy-dir" href="content" />
+        <link data-trunk rel="copy-dir" href="static" data-target-path="/" />
+
+        <!-- Rust WASM build pipeline target -->
+        <link rel="rust" data-trunk href="Cargo.toml" data-target-path="wasm" />
+    </head>
+    <body
+        class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased"
+    >
+        <div id="app"></div>
+    </body>
+</html>

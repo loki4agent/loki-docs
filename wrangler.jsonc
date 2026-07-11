@@ -1,0 +1,10 @@
+{
+  "name": "loki-docs-worker",
+  // Set this to today's date
+  "compatibility_date": "2026-07-06",
+  "assets": {
+    "directory": "./dist/",
+    "not_found_handling": "single-page-application",
+  },
+  "workers_dev": false,
+}
