@@ -59,3 +59,25 @@ bun run build
 
 * **Firefox**: 打开 `about:debugging#/runtime/this-firefox`，点击 **"Load Temporary Add-on..."**，并选择项目根目录下的已编译包 `loki-auto.xpi`（或者选择 `./dist/firefox/manifest.json`）。
 * **Chrome**: 打开 `chrome://extensions/`，启用 **开发者模式 (Developer mode)**，点击 **"加载已解压的扩展程序" (Load unpacked)**，然后选择 `./dist/chrome` 文件夹。
+
+---
+
+### 📱 移动端 (Android) 支持与连接
+
+在 Android 手机上，由于无法方便地运行本地守护进程，我们推荐让手机端的浏览器扩展连接至电脑桌面的 MCP 服务端。
+
+您可以使用支持 Chrome MV3 扩展程序的浏览器（如 Kiwi Browser 或 Firefox Beta for Android），并安装 `loki-auto` 扩展。随后选择以下方案之一进行连接通信：
+
+#### 方案 A：使用 ADB 端口反向代理（推荐）
+如果您通过 USB 数据线将手机连接到电脑，可以通过 ADB 将手机的 localhost 端口反向映射至电脑：
+```bash
+adb reverse tcp:10402 tcp:10402
+```
+* **原理解析**：此命令将手机本地的 `127.0.0.1:10402` 端口流量全部转发到您电脑（宿主机）的 `10402` 端口。
+* **优势**：手机端扩展配置无需更改，可直接使用默认的 `ws://127.0.0.1:10402`。
+
+#### 方案 B：局域网连接
+如果手机和电脑处于相同的 Wi-Fi 网络下：
+1. 修改电脑端 `mcp-server` 配置文件，使 host 监听 `0.0.0.0` 允许外部局域网访问。
+2. 在手机浏览器的 `loki-auto` 扩展设置中，将 WebSocket 地址从 `ws://127.0.0.1:10402` 修改为电脑的局域网 IP（例如 `ws://192.168.1.100:10402`）。
+
