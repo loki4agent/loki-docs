@@ -15,10 +15,12 @@ order: 12
 
 ### 2. 启动本地 MCP 服务端 (Launch the Local MCP Server)
 
-启动 Axum 宿主以开始监听浏览器连接和 LLM 工具调用：
+启动 Axum 宿主以开始监听浏览器连接和 LLM 工具调用。
+
+您可以直接从 [GitHub Releases](https://github.com/loki4agent/loki-auto/releases) 页面下载适用于您平台的已编译好的 `loki-mcp-server` 二进制文件直接运行，或者通过源码运行：
 
 ```bash
-# 启动 MCP 宿主 (默认端口: 10402)
+# 通过源码启动 MCP 宿主 (默认端口: 10402)
 cargo run --bin loki-mcp-server
 ```
 
