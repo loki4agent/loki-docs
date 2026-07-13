@@ -8,13 +8,31 @@ description: "Prerequisites, compilation and build instructions for loki-auto br
 order: 12
 ---
 
-### 1. Prerequisites
+### 1. Install the Browser Extension
+
+* **Chrome**: Install directly from the [Chrome Web Store](https://chromewebstore.google.com/detail/loki-auto/lhplbecpbfajamlefhaiclmbgjbheclm).
+* **Firefox**: Build from source and load manually (see [Build from Source](#build-from-source) below).
+
+### 2. Launch the Local MCP Server
+
+Start the Axum host to begin listening for browser connections and LLM tool calls:
+
+```bash
+# Start the MCP host (default port: 10402)
+cargo run --bin loki-mcp-server
+```
+
+---
+
+### Build from Source (Development / Firefox)
+
+#### 1. Prerequisites
 Ensure you have the following installed on your system:
 * [Bun](https://bun.sh/) (Workspace package manager)
 * [Rust & Cargo](https://rustup.rs/) (with `wasm32-unknown-unknown` target installed: `rustup target add wasm32-unknown-unknown`)
 * [wasm-pack](https://rustwasm.github.io/wasm-pack/installer/) (for Rust-to-WASM compilation)
 
-### 2. Compilation and Build
+#### 2. Compilation and Build
 
 Build the WebAssembly sandbox first, and then compile the extension assets:
 
@@ -33,16 +51,7 @@ This will output two fully-compiled, self-contained extension directories under 
 * **Chrome (Manifest V3)**: `./dist/chrome`
 * **Firefox (Manifest V2)**: `./dist/firefox`
 
-### 3. Load the Browser Extension
+#### 3. Load the Browser Extension Manually
 
 * **Firefox**: Open `about:debugging#/runtime/this-firefox`, click **"Load Temporary Add-on..."**, and select the compiled package `loki-auto.xpi` at the root of the project (or select `./dist/firefox/manifest.json`).
 * **Chrome**: Open `chrome://extensions/`, enable **Developer mode**, click **"Load unpacked"**, and select the `./dist/chrome` folder.
-
-### 4. Launch the Local MCP Server
-
-Start the Axum host to begin listening for browser connections and LLM tool calls:
-
-```bash
-# Start the MCP host (default port: 10402)
-cargo run --bin loki-mcp-server
-```

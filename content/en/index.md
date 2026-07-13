@@ -10,6 +10,8 @@ order: 0
 
 `loki-auto` is an ultra-lightweight, zero-dependency <strong>"Serverless in Browser"</strong> web automation runtime designed for the AI Agent era. It executes episodic, transient LLM tool actions inside a secure <strong>Rhai VM (compiled to WebAssembly)</strong> sandbox container directly within the browser's foreground page context, completely bypassing heavy headless browser resource overhead.
 
+You can also install the pre-compiled extension directly from the [Chrome Web Store](https://chromewebstore.google.com/detail/loki-auto/lhplbecpbfajamlefhaiclmbgjbheclm).
+
 This documentation center is organized into the following three main sections:
 
 ### 🚀 Getting Started
